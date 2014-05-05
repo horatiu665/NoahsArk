@@ -12,8 +12,8 @@ public class PositionOnTerrain : MonoBehaviour {
 		if (Physics.Raycast(transform.position, Vector3.down * 500)) {
 			// instead of this, find better way to reposition stuff.
 			RaycastHit[] rg = Physics.RaycastAll(transform.position, Vector3.down, 500);
-			if (rg.Any(r => r.transform.tag == "Terrain")) {
-				StartCoroutine(EaseTo(rg.First(r => r.transform.tag == "Terrain").point));
+			if (rg.Any(r => r.collider.GetComponent<TerrainCollider>())) {
+				StartCoroutine(EaseTo(rg.First(r => r.collider.GetComponent<TerrainCollider>()).point));
 				//transform.position = rg.First(r => r.transform.tag == "Terrain").point;
 			} else {
 				Destroy(gameObject);
